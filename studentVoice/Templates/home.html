@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Talk</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{%  static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="d-inline-block align-top mr-2">
+            <span class="animated-text">Student Voice</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto"> <!-- Align menu to the right -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <!-- Show signup and login buttons if user is not authenticated -->
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'register' %}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'staff-signin' %}">Staff Login</a>
+                </li>
+                
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'logout' %}">Logout</a>
+                </li>
+
+                {% endif %}
+            </ul>
+            
+        </div>
+    </nav>
+
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Welcome to Our Feedback System</h1>
+            <p class="lead intro-text">Our feedback system is designed to facilitate communication between students and staff, allowing for the submission of feedback, suggestions, and reports on various aspects of campus life.</p>
+            <a class="btn btn-primary btn-lg" href="#features" role="button">Learn more</a>
+        </div>
+        <img src="{% static 'images/students.jpg' %}" alt="Feedback System" class="img-fluid">
+    </div>
+
+    <div class="container bg-light custom-container">
+        <div class="row">
+            <!-- Benefits Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-primary text-center">Benefits</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>For Students</h3>
+                                <ul>
+                                    <li>Improves communication between students and staff.</li>
+                                    <li>Allows students to submit feedback, suggestions, and reports.</li>
+                                    <li>Helps in resolving issues efficiently.</li>
+                                    <li>Enhances the overall campus experience.</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h3>For Staff</h3>
+                                <ul>
+                                    <li>Facilitates receiving and managing feedback from students.</li>
+                                    <li>Enables efficient response to student queries and concerns.</li>
+                                    <li>Provides insights for continuous improvement of campus services.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Instructions Section -->
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-primary text-center">Instructions</h2>
+                        <p class="card-text">To use the feedback system, follow these instructions:</p>
+                        <ol>
+                            <li>Sign in to your account using your credentials.</li>
+                            <li>Click on the "Submit Feedback" button to provide your feedback.</li>
+                            <li>You can track the status of your feedback in the "Feedback Status" section.</li>
+                            <li>If you need assistance, you can contact support through the "Support" page.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- FAQs Section -->
+        <section id="faqs" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title text-center mb-5">Frequently Asked Questions</h2>
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ Item 1 -->
+                    <div class="card">
+                        <div class="card-header" id="faqHeading1">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                                    How do I submit feedback?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="faqCollapse1" class="collapse show" aria-labelledby="faqHeading1" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                To submit feedback, log in to your account and navigate to the feedback submission page. Fill out the required fields and click submit.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="card">
+                        <div class="card-header" id="faqHeading2">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                                    Can I track the status of my feedback?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="faqCollapse2" class="collapse" aria-labelledby="faqHeading2" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Yes, you can track the status of your feedback by visiting the feedback status page. You'll be able to see whether your feedback is pending, in progress, or resolved.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more FAQ items as needed -->
+                </div>
+            </div>
+        </section>
+    
+       <!-- Testimonials Section -->
+       <section id="testimonials" class="section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Testimonials</h2>
+            <div class="row">
+                <!-- Testimonial 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{% static 'images/profile.png' %}" class="card-img-top testimonial-img" alt="Testimonial Image 1">
+                        <div class="card-body">
+                            <p class="card-text">"The feedback system has made it easy for me to share my thoughts and suggestions with the staff. I feel heard and valued as a student."</p>
+                            <footer class="blockquote-footer">John Doe, Student</footer>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{% static 'images/profile.png' %}" class="card-img-top testimonial-img" alt="Testimonial Image 2">
+                        <div class="card-body">
+                            <p class="card-text">"As a staff member, I appreciate how the feedback system streamlines the process of receiving and responding to student feedback. It's been a valuable tool for improving our services."</p>
+                            <footer class="blockquote-footer">Jane Smith, Staff</footer>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{% static 'images/profile.png' %}" class="card-img-top testimonial-img" alt="Testimonial Image 3">
+                        <div class="card-body">
+                            <p class="card-text">"I've found the feedback system to be incredibly useful in addressing issues and making improvements on campus. It's great to see our voices being heard."</p>
+                            <footer class="blockquote-footer">Emily Johnson, Student</footer>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more testimonials as needed -->
+            </div>
+        </div>
+    </section>
+
+    
+        <!-- Call to Action Section -->
+        <section id="cta" class="section bg-primary text-white">
+            <div class="container">
+                <h2 class="section-title text-center mb-4">Ready to Share Your Feedback?</h2>
+                <p class="text-center mb-5">Log in to the feedback system now to start sharing your thoughts and contribute to improving your educational experience.</p>
+                <div class="text-center">
+                    <a href="{% url 'login' %}" class="btn btn-lg btn-outline-light">Log In</a>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+    
+    
+    
+    
+    
+    
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

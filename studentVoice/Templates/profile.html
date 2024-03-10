@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+</head>
+<body>
+    {% if profile %}
+        <h1>User Profile</h1>
+        <ul>
+            <li><strong>Name:</strong> {{ profile.user.username }}</li>            
+            <li><strong>Phone Number:</strong> {{ profile.phone_number }}</li>
+            <li><strong>Faculty:</strong> {{ profile.faculty }}</li>
+            <li><strong>Department:</strong> {{ profile.department }}</li>
+            <li><strong>Course:</strong> {{ profile.course }}</li>
+            {% if profile.profile_picture %}
+                <li><strong>Picture:</strong> <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="100"></li>
+            {% else %}
+                <li><strong>Picture:</strong> No profile picture available</li>
+            {% endif %}
+            <!-- Add more profile details as needed -->
+        </ul>
+        <a href="{% url 'profile_update' %}">Edit Profile</a>
+    {% else %}
+        <h1>Create Profile</h1>
+        <p>You haven't created a profile yet. Please create your profile to continue.</p>
+        <a href="{% url 'profile_create' %}">Create Profile</a>
+    {% endif %}
+</body>
+</html>

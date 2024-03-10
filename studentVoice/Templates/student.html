@@ -1,0 +1,107 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>student</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{% static 'css/student.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{%  static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="d-inline-block align-top mr-2">
+        <span class="animated-text">Student Voice</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto"> <!-- Align menu to the right -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Feedback</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <!-- Show signup and login buttons if user is not authenticated -->
+            {% if not user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'register' %}">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'staff-signin' %}">Staff Login</a>
+            </li>
+            
+            {% else %}
+
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'logout' %}">Logout</a>
+            </li>
+
+            {% endif %}
+        </ul>
+        <div class="nav-item dropdown profile-dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if user.profile.profile_picture %}
+                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" width="30" height="30" class="rounded-circle mr-2">
+                {% else %}
+                <img src="{% static 'images/cover.png' %}" alt="Default Profile Picture" width="30" height="30" class="rounded-circle mr-2">
+                {% endif %}
+                {{ user.username }}
+            </a>
+            
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                <a class="dropdown-item" href="#">Settings</a>
+                
+                
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback List</title>
+</head>
+<body>
+    <!-- Feedback List -->
+    <h2>Feedback List</h2>
+    <ul>
+        {% for feedback in feedbacks %}
+        <li>
+            <a href="{% url 'feedback_details' feedback.id %}">{{ feedback.title }}</a>
+        </li>
+        {% empty %}
+        <li>No feedback available.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Create Feedback Button -->
+    <a href="{% url 'create_feedback' %}"><button>Create Feedback</button></a>
+</body>
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<body>
+    
+</body>
+</html>

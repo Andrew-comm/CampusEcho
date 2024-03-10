@@ -1,0 +1,165 @@
+body{
+  background-color: #f8f9fa;
+}
+
+/* Custom CSS for additional styling */
+.animated-text {
+  font-weight: bold;
+  font-size: 28px; /* Adjust font size as needed */
+  color: #333;
+  display: inline-block;
+  position: relative;
+  animation: glow 2s infinite alternate; /* Add animation */
+}
+
+@keyframes glow {
+  0% {
+    color: #333;
+    text-shadow: 0 0 10px #333;
+  }
+  100% {
+    color: #007bff; /* Change color on animation */
+    text-shadow: 0 0 20px #007bff; /* Add text shadow */
+  }
+}
+
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 28px; /* Increase logo size */
+    color: #333;
+  }
+  .navbar-nav .nav-link {
+    font-size: 18px;
+    color: #333;
+  }
+  .navbar-nav .nav-link:hover {
+    color: #007bff; /* Change color on hover */
+  }
+  .profile-dropdown {
+    position: relative;
+  }
+  .profile-dropdown .dropdown-menu {
+    min-width: 200px;
+  }
+
+
+  
+.jumbotron {
+  background-color: #f8f9fa; /* Light gray background */
+  padding-top: 50px; /* Add top padding to push content down */
+  padding-bottom: 50px; /* Add bottom padding */
+  overflow: hidden; /* Clear floats */
+  position: relative; /* Positioning context for the image */
+}
+.jumbotron .container {
+  margin-right: 2rem; /* Add margin to the right */
+  margin-left: 2rem; /* Add margin to the left */
+  padding-right: 45%; /* Adjust padding to accommodate the image */
+}
+.jumbotron img {
+  position: absolute; /* Position the image */
+  top: 0; /* Align the top of the image with the top of the jumbotron */
+  right: 0; /* Align the image to the right */
+  width: 40%; /* Set width of the image */
+  height: 100%; /* Cover the entire height of the jumbotron */
+}
+.intro-text {
+  color: #333; /* Dark text color */
+}
+
+/* Additional styling for card contents */
+
+.card {
+  background-color: #fff; /* Add white background color */
+}
+
+.card-title {
+  color: #007bff; /* Change title color to a primary blue */
+  font-size: 1.5rem; /* Increase title font size */
+  margin-bottom: 1.5rem; /* Increase margin bottom for title */
+}
+
+.card-body {
+  padding: 2rem; /* Increase padding for card body */
+}
+
+.card-body h3 {
+  color: #343a40; /* Change subheading color to a dark shade */
+}
+
+.card-body ul,
+.card-body ol {
+  margin-top: 1.5rem; /* Add margin top to lists */
+}
+
+.card-body li {
+  color: #6c757d; /* Change list item color to a muted shade */
+}
+
+.card-body p {
+  font-size: 1.1rem; /* Increase paragraph font size */
+  color: #6c757d; /* Change paragraph color to a muted shade */
+}
+
+.container .bg-light{
+  background-color: #f8f9fa; background-color: #f8f9fa; 
+  width: calc(100% - 4rem); /* Calculate the width with margins subtracted */
+  
+
+}
+
+#faqs .card-header {
+  background-color: #f8f9fa; /* Light gray background for card header */
+}
+
+#faqs .card-header button {
+  color: #007bff; /* Blue color for FAQ buttons */
+}
+
+#faqs .card-header button:hover {
+  text-decoration: underline; /* Add underline effect on hover */
+}
+
+/* Additional styling for Testimonials Section */
+#testimonials .card {
+  background-color: #f8f9fa; /* Light gray background for testimonials cards */
+  border: none; /* Remove border */
+}
+
+#testimonials .card-body {
+  padding: 1.5rem; /* Add padding to testimonial card body */
+}
+
+#testimonials .card-text {
+  font-style: italic; /* Italicize testimonial text */
+}
+
+#testimonials .blockquote-footer {
+  font-size: 0.9rem; /* Reduce font size of testimonial author */
+}
+
+/* Additional styling for Call to Action Section */
+#cta {
+  padding: 4rem 0; /* Add padding to call to action section */
+  margin-bottom: 8rem; /* Add margin for spacing after the section */
+}
+
+#cta .btn-outline-light {
+  color: #ffffff; /* White text color for call to action button */
+  border-color: #ffffff; /* White border color for call to action button */
+  background-color: transparent; /* Transparent background initially */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+#cta .btn-outline-light:hover {
+  background-color: #ffffff; /* White background color on hover */
+  color: #007bff; /* Blue text color on hover */
+}
+
+
+.testimonial-img {
+  border-radius: 10px; /* Add border radius to testimonial images */
+  height: 200px;
+  width:200px;
+}

@@ -1,0 +1,7 @@
+{% for feedback in feedbacks %}
+    <div>
+        <h3>{{ feedback.title }}</h3>
+        <p>{{ feedback.description }}</p>
+        <a href="{% url 'feedback_details' feedback.id %}">View Details</a>
+    </div>
+{% endfor %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Details</title>
+</head>
+<body>
+    <h2>{{ feedback.title }}</h2>
+    <p>{{ feedback.description }}</p>
+    <p>Category: {{ feedback.get_category_display }}</p>
+    <p>Severity: {{ feedback.get_severity_display }}</p>
+    <p>Feedback Type: {{ feedback.get_feedback_type_display }}</p>
+    <p>Submitted At: {{ feedback.submitted_at }}</p>
+    {% if feedback.evidence %}
+    <p>Evidence: <a href="{{ feedback.evidence.url }}">Download</a></p>
+    {% endif %}
+    <p>Status: {{ feedback.get_status_display }}</p>
+    <!-- Add more details as needed -->
+</body>
+</html>
