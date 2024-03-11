@@ -1,0 +1,11 @@
+<h2>All Feedbacks</h2>
+<ul>
+    {% for feedback in feedbacks %}
+    <li>
+        <a href="{% url 'admin_feedback_details' feedback.id %}">{{ feedback.title }}</a>
+        (Submitted by: {{ feedback.submitted_by.username }})
+    </li>
+    {% empty %}
+    <li>No feedback available.</li>
+    {% endfor %}
+</ul>

@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Home</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Administrator Dashboard</title>
     <!-- Add your CSS links here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add your custom CSS styles here */
+        .feedback-container {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Staff Dashboard</h1>
-    <!-- Add your staff dashboard content here -->
-    <p>This is the home page for staff users.</p>
+    <div class="container">
+        <h1>Welcome to Administrator Dashboard</h1>
+        
+        <!-- Feedback List -->
+        <h2>Feedback List</h2>
+        {% for feedback in feedbacks %}
+        {{user.username}}
+        <div class="feedback-container">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{ feedback.title }}</h5>
+                    <span class="badge badge-primary">{{ feedback.category }}</span>
+                    <span class="badge badge-info">{{ feedback.severity }}</span>
+                    <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
+                    <span class="badge badge-warning">{{ feedback.status }}</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ feedback.description }}</p>
+                    <p class="card-text"><strong>Submitted at:</strong> {{ feedback.submitted_at }}</p>
+                    {% if feedback.evidence %}
+                    <p class="card-text"><strong>Evidence:</strong> <img src="{{ feedback.evidence.url }}" alt="Evidence" style="max-width: 100px;"></p>
+                    {% endif %}
+                    {% if feedback.solution %}
+                    <p class="card-text"><strong>Solution:</strong> {{ feedback.solution }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <form method="post" action="{% url 'resolve_feedback' feedback.id %}">  
+            
+                {% csrf_token %}
+                <textarea name="solution" placeholder="Enter solution"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        
+
+        {% empty %}
+        <div class="alert alert-info">No feedback available.</div>
+        {% endfor %}
+        
+        <!-- Add your staff dashboard content here -->
+        <p>This is the home page for administrator users.</p>
+    </div>
+    
+    <!-- Include Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

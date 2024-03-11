@@ -22,5 +22,11 @@ urlpatterns = [
     path('list/', views.feedback_list, name='feedback_list'),
     path('<int:feedback_id>/', views.feedback_details, name='feedback_details'),
     path('all/', views.all_user_feedbacks, name='all_user_feedbacks'),
+
+
+
+    path('admin/feedback/', views.admin_feedback_list, name='admin_feedback_list'),
+    path('resolve-feedback/<int:feedback_id>/', views.resolve_feedback, name='resolve_feedback'),
+
    
 ]

@@ -23,3 +23,9 @@ class FeedbackForm(forms.ModelForm):
         model = Feedback
         fields = ['category', 'severity', 'feedback_type', 'title', 'description', 'evidence', 'status']
 
+
+
+class FeedbackSolutionForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['solution']

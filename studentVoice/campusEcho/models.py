@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-
+from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 
 class UserManager(BaseUserManager):
@@ -13,13 +13,14 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-
     def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('user_type', 'administrator')  # Set default user_type
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)  # Also set active for superuser
-        return self.create_user(email, password=password, **extra_fields)
+            extra_fields.setdefault('user_type', 'administrator')
+            extra_fields.setdefault('is_staff', True)
+            extra_fields.setdefault('is_superuser', True)  # Ensure is_superuser is True
+            if extra_fields.get('is_superuser') is not True:
+                raise ValueError('Superuser must have is_superuser=True.')  # Raise error if is_superuser is not True
+            return self.create_user(email, password=password, **extra_fields)
+
 
 
 class User(AbstractBaseUser):
@@ -120,7 +121,9 @@ class Feedback(models.Model):
     description = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
     evidence = models.ImageField(upload_to='feedback_evidence/', blank=True, null=True)
+    recommendation = models.TextField(blank=True, null=True)    
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='pending')
+    solution = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return f"{self.get_category_display()} Feedback - {self.title}"

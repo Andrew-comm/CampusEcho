@@ -2,7 +2,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CustomUserCreationForm, ProfileForm, FeedbackForm
+from .forms import CustomUserCreationForm, ProfileForm, FeedbackForm, FeedbackSolutionForm
+
 from .models import Profile, Feedback, User
 from django.contrib.auth.decorators import login_required
 
@@ -15,10 +16,34 @@ def home(request):
 
 
 def studenthome(request):
-    return render(request, 'student.html')
+    feedbacks = Feedback.objects.all()
+    resolved_feedbacks = Feedback.objects.filter(status='resolved')  # Filter resolved feedbacks
+    context = {
+        'feedbacks': feedbacks,
+        'resolved_feedbacks': resolved_feedbacks,  # Pass resolved feedbacks to the template
+    }
+    return render(request, 'student.html', context)
 
 def staffhome(request):
-    return render(request, 'staff_home.html')
+    feedbacks = Feedback.objects.all()
+    context ={'feedbacks':feedbacks}
+    return render(request, 'staff_home.html', context)
+
+def resolve_feedback(request, feedback_id):
+    if request.method == 'POST':
+        feedback = Feedback.objects.get(id=feedback_id)
+        recommendation = request.POST.get('recommendation')
+        solution = request.POST.get('solution')
+        if recommendation:
+            feedback.recommendation = recommendation
+        if solution:
+            feedback.solution = solution  # Assign solution to the feedback object
+            feedback.status = 'resolved'
+        feedback.save()  # Save the feedback object
+        return redirect('staffhome')
+    else:
+        return redirect('staffhome')
+
 
 def signup_view(request):
     error_message = None
@@ -166,3 +191,10 @@ def all_user_feedbacks(request):
         return render(request, 'all_user_feedbacks.html', {'user_feedbacks': user_feedbacks})
     else:
         return redirect('feedback_list')
+
+
+
+@login_required
+def admin_feedback_list(request):
+    feedbacks = Feedback.objects.all()
+    return render(request, 'admin_feedback_list.html', {'feedbacks': feedbacks})
