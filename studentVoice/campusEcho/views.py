@@ -14,19 +14,47 @@ User = get_user_model()
 def home(request):
     return render(request, 'home.html')
 
-
 def studenthome(request):
-    feedbacks = Feedback.objects.all()
-    resolved_feedbacks = Feedback.objects.filter(status='resolved')  # Filter resolved feedbacks
+    # Assuming you have a way to identify the current student, for example, through authentication
+    current_student = request.user  # Assuming the current user is the student
+
+    # Filter feedbacks associated with the current student
+    feedbacks = Feedback.objects.filter(student=current_student)
+
+    # Filter resolved feedbacks associated with the current student
+    resolved_feedbacks = Feedback.objects.filter(student=current_student, status='resolved')
+
     context = {
         'feedbacks': feedbacks,
-        'resolved_feedbacks': resolved_feedbacks,  # Pass resolved feedbacks to the template
+        'resolved_feedbacks': resolved_feedbacks,
     }
     return render(request, 'student.html', context)
 
 def staffhome(request):
     feedbacks = Feedback.objects.all()
-    context ={'feedbacks':feedbacks}
+
+    # Get filter parameters from the request
+    category = request.GET.get('category')
+    severity = request.GET.get('severity')
+    feedback_type = request.GET.get('feedback_type')
+
+    # Filter feedbacks based on provided parameters
+    if category:
+        feedbacks = feedbacks.filter(category=category)
+    if severity:
+        feedbacks = feedbacks.filter(severity=severity)
+    if feedback_type:
+        feedbacks = feedbacks.filter(feedback_type=feedback_type)
+
+    context = {
+        'feedbacks': feedbacks,
+        'category_choices': Feedback.CATEGORY_CHOICES,
+        'severity_choices': Feedback.SEVERITY_CHOICES,
+        'feedback_type_choices': Feedback.FEEDBACK_TYPE_CHOICES,
+        'selected_category': category,
+        'selected_severity': severity,
+        'selected_feedback_type': feedback_type,
+    }
     return render(request, 'staff_home.html', context)
 
 def resolve_feedback(request, feedback_id):
@@ -37,14 +65,12 @@ def resolve_feedback(request, feedback_id):
         if recommendation:
             feedback.recommendation = recommendation
         if solution:
-            feedback.solution = solution  # Assign solution to the feedback object
+            feedback.solution = solution
             feedback.status = 'resolved'
-        feedback.save()  # Save the feedback object
+        feedback.save()
         return redirect('staffhome')
     else:
         return redirect('staffhome')
-
-
 def signup_view(request):
     error_message = None
     form = CustomUserCreationForm()
@@ -98,7 +124,7 @@ def staff_login_view(request):
 
 def staff_logout_view(request):
     logout(request)
-    return redirect('stafflogin')
+    return redirect('home')
 
 
 

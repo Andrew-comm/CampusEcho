@@ -1,7 +1,52 @@
-<h2>Create New Feedback</h2>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Feedback</title>
+    <link rel="stylesheet" href="{% static 'css/create_feedback.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Create New Feedback</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_category">Category:</label>
+                    {{ form.category }}
+                </div>
+                <div class="form-group">
+                    <label for="id_severity">Severity:</label>
+                    {{ form.severity }}
+                </div>
+                <div class="form-group">
+                    <label for="id_feedback_type">Feedback Type:</label>
+                    {{ form.feedback_type }}
+                </div>
+                <div class="form-group">
+                    <label for="id_title">Title:</label>
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    <label for="id_description">Description:</label>
+                    <textarea name="description" id="id_description" class="form-control description-textarea" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="id_evidence">Evidence:</label>
+                    {{ form.evidence }}
+                </div>
+                <div class="form-group">
+                    <label for="id_status">Status:</label>
+                    {{ form.status }}
+                </div>
+                <button type="submit" class="btn btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

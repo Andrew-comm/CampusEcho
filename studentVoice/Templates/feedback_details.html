@@ -1,21 +1,82 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback Details</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/feedback_details.css' %}">
 </head>
 <body>
-    <h2>{{ feedback.title }}</h2>
-    <p>{{ feedback.description }}</p>
-    <p>Category: {{ feedback.get_category_display }}</p>
-    <p>Severity: {{ feedback.get_severity_display }}</p>
-    <p>Feedback Type: {{ feedback.get_feedback_type_display }}</p>
-    <p>Submitted At: {{ feedback.submitted_at }}</p>
-    {% if feedback.evidence %}
-    <p>Evidence: <a href="{{ feedback.evidence.url }}">Download</a></p>
-    {% endif %}
-    <p>Status: {{ feedback.get_status_display }}</p>
-    <!-- Add more details as needed -->
+    <div class="container">
+        <h2>{{ feedback.title }}</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Description:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ feedback.description }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Category:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ feedback.get_category_display }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Severity:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ feedback.get_severity_display }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Feedback Type:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ feedback.get_feedback_type_display }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Submitted At:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ feedback.submitted_at }}</p>
+                    </div>
+                </div>
+                {% if feedback.evidence %}
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Evidence:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p><a href="{{ feedback.evidence.url }}" class="evidence-link">Download</a></p>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Status:</strong>
+                    </div>
+                    <div class="col-8">
+                        <p>{{ feedback.get_status_display }}</p>
+                    </div>
+                </div>
+                <!-- Add more details as needed -->
+            </div>
+        </div>
+    </div>
 </body>
 </html>

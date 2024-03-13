@@ -1,7 +1,27 @@
-{% for feedback in feedbacks %}
-    <div>
-        <h3>{{ feedback.title }}</h3>
-        <p>{{ feedback.description }}</p>
-        <a href="{% url 'feedback_details' feedback.id %}">View Details</a>
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback List</title>
+    <link rel="stylesheet" href=" {% static 'css/feedback_list.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Feedback List</h2>
+        {% for feedback in feedbacks %}
+            <div class="feedback-card">
+                <h3>{{ feedback.title }}</h3>
+                <p>{{ feedback.description }}</p>
+                <a href="{% url 'feedback_details' feedback.id %}" class="view-details-link">View Details</a>
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}
+</body>
+</html>

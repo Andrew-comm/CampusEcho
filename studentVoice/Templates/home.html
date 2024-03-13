@@ -9,49 +9,61 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
+<style>
+    .navbar-brand {
+  font-weight: bold;
+  font-size: 28px; /* Increase logo size */
+  color: #333;
+}
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="{%  static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="d-inline-block align-top mr-2">
-            <span class="animated-text">Student Voice</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto"> <!-- Align menu to the right -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Feedback</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <!-- Show signup and login buttons if user is not authenticated -->
-                {% if not user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link glowing-btn" href="{% url 'register' %}">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link glowing-btn" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link glowing-btn" href="{% url 'staff-signin' %}">Staff Login</a>
-                </li>
-                
-                {% else %}
+.navbar-nav .nav-link {
+  font-size: 18px;
+  color: #333;
+  border: 1px solid transparent; /* Add transparent border */
+  border-radius: 5px; /* Add border radius */
+  padding: 8px 15px; /* Add padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
 
-                <li class="nav-item">
-                    <a class="nav-link glowing-btn" href="{% url 'logout' %}">Logout</a>
-                </li>
+.navbar-nav .nav-link:hover {
+  color: #007bff; /* Change color on hover */
+  border-color: #007bff; /* Change border color on hover */
+}
+</style>
 
-                {% endif %}
-            </ul>
-            
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{%  static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="d-inline-block align-top mr-2">
+        <span class="animated-text">Student Voice</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto"> <!-- Align menu to the right -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#cta">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#testimonials">Testimonials</a>
+            </li>               
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'register' %}">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link glowing-btn" href="{% url 'staff-signin' %}">Staff Login</a>
+            </li>                
+        </ul>
+    </div>
+</nav>
+
+
 
 
 <body>
@@ -158,7 +170,7 @@
                 <!-- Testimonial 1 -->
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="{% static 'images/profile.png' %}" class="card-img-top testimonial-img" alt="Testimonial Image 1">
+                        <img src="{% static 'images/stud1.jpg' %}" class="card-img-top testimonial-img" alt="Testimonial Image 1">
                         <div class="card-body">
                             <p class="card-text">"The feedback system has made it easy for me to share my thoughts and suggestions with the staff. I feel heard and valued as a student."</p>
                             <footer class="blockquote-footer">John Doe, Student</footer>
@@ -168,7 +180,7 @@
                 <!-- Testimonial 2 -->
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="{% static 'images/profile.png' %}" class="card-img-top testimonial-img" alt="Testimonial Image 2">
+                        <img src="{% static 'images/stud2.jpg' %}" class="card-img-top testimonial-img" alt="Testimonial Image 2">
                         <div class="card-body">
                             <p class="card-text">"As a staff member, I appreciate how the feedback system streamlines the process of receiving and responding to student feedback. It's been a valuable tool for improving our services."</p>
                             <footer class="blockquote-footer">Jane Smith, Staff</footer>
@@ -178,7 +190,7 @@
                 <!-- Testimonial 3 -->
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="{% static 'images/profile.png' %}" class="card-img-top testimonial-img" alt="Testimonial Image 3">
+                        <img src="{% static 'images/stud3.jpg' %}" class="card-img-top testimonial-img" alt="Testimonial Image 3">
                         <div class="card-body">
                             <p class="card-text">"I've found the feedback system to be incredibly useful in addressing issues and making improvements on campus. It's great to see our voices being heard."</p>
                             <footer class="blockquote-footer">Emily Johnson, Student</footer>

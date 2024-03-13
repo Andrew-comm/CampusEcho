@@ -13,114 +13,104 @@
     
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="{%  static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="d-inline-block align-top mr-2">
-        <span class="animated-text">Student Voice</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto"> <!-- Align menu to the right -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Feedback</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Dashboard</a>
-            </li>
-            <!-- Show signup and login buttons if user is not authenticated -->
-            {% if not user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link glowing-btn" href="{% url 'register' %}">Sign Up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link glowing-btn" href="{% url 'login' %}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link glowing-btn" href="{% url 'staff-signin' %}">Staff Login</a>
-            </li>
-            
-            {% else %}
+<body>
 
-            <li class="nav-item">
-                <a class="nav-link glowing-btn" href="{% url 'logout' %}">Logout</a>
-            </li>
-
-            {% endif %}
-        </ul>
-        <div class="nav-item dropdown profile-dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {% if user.profile.profile_picture %}
-                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" width="30" height="30" class="rounded-circle mr-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="d-inline-block align-top mr-2">
+            <span class="animated-text">Student Voice</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'register' %}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link glowing-btn" href="{% url 'staff-signin' %}">Staff Login</a>
+                </li>
                 {% else %}
-                <img src="{% static 'images/cover.png' %}" alt="Default Profile Picture" width="30" height="30" class="rounded-circle mr-2">
+                <li class="nav-item dropdown profile-dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if user.profile.profile_picture %}
+                        <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" width="30" height="30" class="rounded-circle mr-2">
+                        {% else %}
+                        <img src="{% static 'images/cover.png' %}" alt="Default Profile Picture" width="30" height="30" class="rounded-circle mr-2">
+                        {% endif %}
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                    </div>
+                </li>
                 {% endif %}
-                {{ user.username }}
-            </a>
-            
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                
-                
-            </div>
+            </ul>
         </div>
-    </div>
-</nav>
-<body>
-    <div class="row">
-        {% for feedback in feedbacks %}
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ feedback.title }}</h5>
-                <p class="card-text">{{ feedback.description|truncatewords:30 }}</p>
-                <span class="badge bg-primary">{{ feedback.category }}</span>
-                <small class="text-muted">Received on {{ feedback.submitted_at }}</small>
-                <a href="{% url 'feedback_details' feedback.id %}" class="card-link">Read More</a>
-              </div>
-            </div>
-          </div>
-        {% empty %}
-          <div class="alert alert-info">No feedback available.</div>
-        {% endfor %}
-
-        
-      </div>
-      
-      <!-- Create Feedback Button -->
-      <a href="{% url 'create_feedback' %}" class="btn btn-primary mt-3">Create Feedback</a>
-
-      <div class="row mt-2">
-        {% for feedback in resolved_feedbacks %}
-<div class="col-md-4">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ feedback.title }}</h5>
-            <p class="card-text">{{ feedback.description|truncatewords:30 }}</p>
-            <span class="badge bg-primary">{{ feedback.category }}</span>
-            <small class="text-muted">Received on {{ feedback.submitted_at }}</small>
-            <p class="card-text"><strong>Solution:</strong> {{ feedback.solution }}</p> <!-- Display solution -->
-        </div>
-    </div>
-</div>
-{% empty %}
-<div class="alert alert-info">No resolved feedback available.</div>
-{% endfor %}
-      </div>
-      
-</body>
-</html>
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<body>
+    </nav>
     
-</body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Feedback</h2>
+                {% for feedback in feedbacks %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ feedback.title }}</h5>
+                        <p class="card-text">{{ feedback.description|truncatewords:30 }}</p>
+                        <span class="badge bg-primary">{{ feedback.category }}</span>
+                        <small class="text-muted d-block mt-2">Received on {{ feedback.submitted_at }}</small>
+                        <a href="{% url 'feedback_details' feedback.id %}" class="btn btn-primary mt-2">Read More</a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-info">No feedback available.</div>
+                {% endfor %}
+            </div>
+    
+            <div class="col-md-6">
+                <h2>Resolved Feedback</h2>
+                {% for feedback in resolved_feedbacks %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ feedback.title }}</h5>
+                        <p class="card-text">{{ feedback.description|truncatewords:30 }}</p>
+                        <span class="badge bg-primary">{{ feedback.category }}</span>
+                        <small class="text-muted d-block mt-2">Received on {{ feedback.submitted_at }}</small>
+                        <p class="card-text"><strong>Solution:</strong> {{ feedback.solution }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-info">No resolved feedback available.</div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <!-- Create Feedback Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'create_feedback' %}" class="btn btn-primary">Create Feedback</a>
+        </div>
+    </div>
+    
+    <!-- Include Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    </body>
 </html>

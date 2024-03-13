@@ -124,6 +124,7 @@ class Feedback(models.Model):
     recommendation = models.TextField(blank=True, null=True)    
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='pending')
     solution = models.TextField(blank=True, null=True)
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return f"{self.get_category_display()} Feedback - {self.title}"

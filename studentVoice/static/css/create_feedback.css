@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px; /* Reduce card width */
+    margin: 0 auto; /* Center the card horizontally */
+    background-color: #fff; /* Set card background color */
+}
+h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.form-group label {
+    font-weight: bold;
+}
+.form-control {
+    height: auto;
+}
+.description-textarea {
+    height: 150px; /* Adjust height as needed */
+    resize: none; /* Disable textarea resizing */
+    padding: 10px; /* Add padding for better readability */
+}
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    width: 100%;
+}
+.btn-submit:hover {
+    background-color: #0056b3;
+}

@@ -1,17 +1,27 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Login</title>
-    <!-- Add your CSS links here -->
+    <link rel="stylesheet" href="{% static 'css/staff_login.css' %}">
+    
 </head>
 <body>
-    <h1>Staff Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="container">
+        <div class="logo text-center">
+            <img src="{% static 'images/mmu.png' %}" alt="Logo" class="img-fluid">
+        </div>
+        <h2 class="text-center">Staff Login</h2>
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
 </body>
 </html>

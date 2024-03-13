@@ -1,3 +1,6 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,56 +8,162 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Administrator Dashboard</title>
     <!-- Add your CSS links here -->
+    <link rel="stylesheet" href="{% static 'css/staffhome.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Add your custom CSS styles here */
-        .feedback-container {
-            margin-bottom: 20px;
-        }
-    </style>
+    
+    
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Administrator Dashboard</h1>
-        
-        <!-- Feedback List -->
-        <h2>Feedback List</h2>
-        {% for feedback in feedbacks %}
-        {{user.username}}
-        <div class="feedback-container">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">{{ feedback.title }}</h5>
-                    <span class="badge badge-primary">{{ feedback.category }}</span>
-                    <span class="badge badge-info">{{ feedback.severity }}</span>
-                    <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
-                    <span class="badge badge-warning">{{ feedback.status }}</span>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-auto logo-container">
+                        <img src="{% static 'images/default.png' %}" alt="Feedback System Logo" width="80" height="60" class="logo">
+                    </div>
+                    <div class="col-md-auto">
+                        <h1 class="mt-5">Welcome to Administrator Dashboard</h1>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">{{ feedback.description }}</p>
-                    <p class="card-text"><strong>Submitted at:</strong> {{ feedback.submitted_at }}</p>
-                    {% if feedback.evidence %}
-                    <p class="card-text"><strong>Evidence:</strong> <img src="{{ feedback.evidence.url }}" alt="Evidence" style="max-width: 100px;"></p>
-                    {% endif %}
-                    {% if feedback.solution %}
-                    <p class="card-text"><strong>Solution:</strong> {{ feedback.solution }}</p>
-                    {% endif %}
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{% static 'images/cover.png' %}" alt="Profile Image" class="rounded-circle" width="40" height="40">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="{% url 'staff-signout' %}">Logout</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <form method="post" action="{% url 'resolve_feedback' feedback.id %}">  
-            
-                {% csrf_token %}
-                <textarea name="solution" placeholder="Enter solution"></textarea>
-                <button type="submit">Submit</button>
-            </form>
+        </nav>
+    </div>
+    
+    
+
+        <!-- Filtering Options -->
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <span class="page-description">This is Administrator <span class="username">{{ user.username | capfirst }}</span> page</span>
+                </div>
+                <div class="col-md-6">
+                    <form method="GET">
+                        <div class="form-row align-items-end">
+                            <div class="form-group col">
+                                <label for="category">Category:</label>
+                                <select name="category" id="category" class="form-control">
+                                    <option value="">All</option>
+                                    {% for choice in category_choices %}
+                                        <option value="{{ choice.0 }}" {% if choice.0 == selected_category %} selected {% endif %}>{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="severity">Severity:</label>
+                                <select name="severity" id="severity" class="form-control">
+                                    <option value="">All</option>
+                                    {% for choice in severity_choices %}
+                                        <option value="{{ choice.0 }}" {% if choice.0 == selected_severity %} selected {% endif %}>{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="feedback_type">Feedback Type:</label>
+                                <select name="feedback_type" id="feedback_type" class="form-control">
+                                    <option value="">All</option>
+                                    {% for choice in feedback_type_choices %}
+                                        <option value="{{ choice.0 }}" {% if choice.0 == selected_feedback_type %} selected {% endif %}>{{ choice.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <button type="submit" class="btn btn-primary btn-block">Apply Filter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Feedback Sections -->
+        <div class="row feedback-section ml-2 mr-2">
+            <div class="col-md-6">
+                <h2>Pending Feedback</h2>
+                {% for feedback in feedbacks %}
+                    {% if feedback.status == 'pending' %}
+                        <div class="feedback-container">
+                            <!-- Feedback Card -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{ feedback.title }}</h5>
+                                    <span class="badge badge-primary">{{ feedback.category }}</span>
+                                    <span class="badge badge-info">{{ feedback.severity }}</span>
+                                    <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
+                                    <span class="badge badge-warning">{{ feedback.status }}</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ feedback.description }}</p>
+                                    <p class="card-text"><strong>Submitted at:</strong> {{ feedback.submitted_at }}</p>
+                                    {% if feedback.evidence %}
+                                        <p class="card-text"><strong>Evidence:</strong> <img src="{{ feedback.evidence.url }}" alt="Evidence" style="max-width: 100px;"></p>
+                                    {% endif %}
+                                </div>
+                                <!-- Form to Submit Solution -->
+                                <form method="post" action="{% url 'resolve_feedback' feedback.id %}">  
+                                    {% csrf_token %}
+                                    <div class="card-footer">
+                                        <textarea name="solution" class="form-control" placeholder="Enter solution"></textarea>
+                                        <button type="submit" class="btn btn-primary mt-2">Submit Solution</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <div class="alert alert-info">No pending feedback available.</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+                <h2>Solved Feedback</h2>
+                {% for feedback in feedbacks %}
+                    {% if feedback.status == 'resolved' %}
+                        <div class="feedback-container">
+                            <!-- Feedback Card -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{ feedback.title }}</h5>
+                                    <span class="badge badge-primary">{{ feedback.category }}</span>
+                                    <span class="badge badge-info">{{ feedback.severity }}</span>
+                                    <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
+                                    <span class="badge badge-success">{{ feedback.status }}</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ feedback.description }}</p>
+                                    <p class="card-text"><strong>Submitted at:</strong> {{ feedback.submitted_at }}</p>
+                                    {% if feedback.evidence %}
+                                        <p class="card-text"><strong>Evidence:</strong> <img src="{{ feedback.evidence.url }}" alt="Evidence" style="max-width: 100px;"></p>
+                                    {% endif %}
+                                    {% if feedback.solution %}
+                                        <p class="card-text"><strong>Solution:</strong> {{ feedback.solution }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <div class="alert alert-info">No solved feedback available.</div>
+                {% endfor %}
+            </div>
         </div>
 
-        
-
-        {% empty %}
-        <div class="alert alert-info">No feedback available.</div>
-        {% endfor %}
-        
         <!-- Add your staff dashboard content here -->
         <p>This is the home page for administrator users.</p>
     </div>

@@ -1,0 +1,35 @@
+.feedback-container {
+    margin-bottom: 20px;
+}
+.feedback-section {
+    margin-top: 30px;
+}
+
+h1 {
+    color: #333; /* Change the color of the heading */
+    margin-bottom: 30px;
+}
+/* Custom styling for logo and h1 */
+.logo-container {
+    border: 2px solid #ccc; /* Add border to logo container */
+    border-radius: 10px; /* Add border radius */
+    padding: 10px; /* Add padding */
+    background-color: #f8f9fa; /* Add background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+.logo img {
+    display: block; /* Make the image a block element */
+    margin: auto; /* Center the image horizontally */
+}
+h1 {
+    border-bottom: 2px solid #ccc; /* Add border to bottom of h1 */
+    padding-bottom: 10px; /* Add padding to bottom of h1 */
+}
+.username {
+    font-weight: bold;
+    color: #007bff; /* Change the color to your preference */
+}
+.page-description {
+    font-style: italic;
+    color: #6c757d; /* Change the color to your preference */
+}
