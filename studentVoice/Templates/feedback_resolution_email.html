@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Resolution Notification</title>
+</head>
+<body>
+    <p>Dear {{ feedback.student.first_name }},</p>
+    <p>We are pleased to inform you that your feedback titled '{{ feedback.title }}' has been resolved.</p>
+    <p>Solution: {{ feedback.solution }}</p>
+    <p>Thank you for your patience and understanding.</p>
+    <p>Regards,<br>The Student Voice Team</p>
+</body>
+</html>

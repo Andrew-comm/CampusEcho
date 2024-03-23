@@ -1,0 +1,8 @@
+setup.cfg
+setup.py
+django_paginate.egg-info/PKG-INFO
+django_paginate.egg-info/SOURCES.txt
+django_paginate.egg-info/dependency_links.txt
+django_paginate.egg-info/not-zip-safe
+django_paginate.egg-info/top_level.txt
+paginate/__init__.py

@@ -1,0 +1,148 @@
+body{
+    background-image: url("{% static 'images/gym.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+/* Custom styles here */
+.navbar {
+    font-size: 18px;
+    padding: 15px 30px;
+}
+
+.carousel-item img {
+    height: 500px; /* Adjust height as needed */
+    width: auto;
+    object-fit: cover;
+}
+
+.post {
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 20px;
+margin-bottom: 20px;
+}
+
+/* Style for the post header */
+.post-header {
+margin-bottom: 15px;
+}
+
+/* Author name styling */
+.post-author {
+font-weight: bold;
+margin-bottom: 5px;
+color: #333;
+}
+
+/* Title styling */
+.post-title {
+font-size: 22px;
+margin-bottom: 10px;
+color: #007bff;
+}
+
+/* Content styling */
+.post-content {
+color: #555;
+line-height: 1.6;
+}
+
+/* Like and Comment buttons */
+.btn-like,
+.btn-comment {
+margin-top: 10px;
+padding: 8px 16px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+/* Post actions styling */
+.post-actions {
+display: flex;
+justify-content: space-between;
+}
+
+/* Like button styling */
+.btn-like {
+order: 1; /* Set the order to 1 to move it to the left */
+}
+
+/* Comment button styling */
+.btn-comment {
+order: 2; /* Set the order to 2 to move it to the right */
+}
+
+
+/* Primary button styling */
+.btn-primary {
+background-color: #007bff;
+color: #fff;
+}
+
+.btn-primary:hover {
+background-color: #0056b3;
+}
+
+/* Comment section styling */
+.comments-section {
+margin-top: 20px;
+}
+
+/* Comment styling */
+.comment {
+margin-bottom: 10px;
+padding: 10px;
+background-color: #f9f9f9;
+border-radius: 5px;
+}
+
+.comment-author {
+font-weight: bold;
+color: #333;
+}
+
+.comment-content {
+margin-top: 5px;
+color: #555;
+}
+
+/* Form styling */
+.form-group {
+margin-bottom: 15px;
+}
+
+.form-control {
+width: 100%;
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+/* Submit button */
+.btn-submit {
+padding: 8px 16px;
+border: none;
+border-radius: 5px;
+background-color: #007bff;
+color: #fff;
+cursor: pointer;
+}
+
+.btn-submit:hover {
+background-color: #e60f93;
+}
+
+/* Font Awesome icons */
+.fa-heart,
+.fa-comment {
+
+display: inline-block;
+}
+
+.text-color{
+color: rgb(2, 2, 2);
+}

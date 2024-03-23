@@ -1,0 +1,25 @@
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: Arial, sans-serif; /* Use Arial font */
+}
+.container {
+    width: 200px; /* Limit container width for better readability */
+    margin: 0 auto; /* Center container horizontally */
+    padding: 20px; /* Add some padding */
+    background-color: #fff; /* White background for container */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+h1 {
+    text-align: center; /* Center align heading */
+    margin-bottom: 30px; /* Add some space below heading */
+}
+label {
+    font-weight: bold; /* Make labels bold */
+}
+textarea.form-control {
+    resize: vertical; /* Allow vertical resizing for textarea */
+}
+button[type="submit"] {
+    width: 100%; /* Make the button full width */
+}

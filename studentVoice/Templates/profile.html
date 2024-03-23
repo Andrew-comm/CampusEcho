@@ -14,9 +14,9 @@
 <body>
     <div class="container">
         {% if profile %}
-            <h1>{{user.username | capfirst}} Profile</h1>
+            <h1>{{profile.name | capfirst}} Profile</h1>
             <ul>
-                <li><strong>Name:</strong> {{ profile.user.username }}</li>            
+                <li><strong>Name:</strong> {{ profile.name }}</li>            
                 <li><strong>Phone Number:</strong> {{ profile.phone_number }}</li>
                 <li><strong>Admission Number:</strong> {{ profile.admission }}</li>
                 <li><strong>Faculty:</strong> {{ profile.faculty }}</li>

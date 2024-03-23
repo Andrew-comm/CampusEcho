@@ -25,6 +25,13 @@ urlpatterns = [
 
 
 
+    path('community/', views.community_feed_list, name='community_feed'),
+    path('create-post', views.community_feed_create, name='create-post'),
+    path('comments/<int:post_id>/', views.add_comment, name='comments'), 
+    path('likes/<int:post_id>/', views.like_post, name='like_post'),
+
+
+
     path('admin/feedback/', views.admin_feedback_list, name='admin_feedback_list'),
     path('resolve-feedback/<int:feedback_id>/', views.resolve_feedback, name='resolve_feedback'),
 

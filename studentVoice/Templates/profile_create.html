@@ -44,41 +44,10 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1>Create Profile</h1>
+            <h1>{{profile.name}}Create Profile</h1>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="id_name">Name:</label>
-                    {{ form.name }}
-                </div>
-                <div class="form-group">
-                    <label for="id_admission">Admission:</label>
-                    {{ form.admission }}
-                </div>
-                <div class="form-group">
-                    <label for="id_profile_picture">Profile Picture:</label>
-                    {{ form.profile_picture }}
-                </div>
-                <div class="form-group">
-                    <label for="id_faculty">Faculty:</label>
-                    {{ form.faculty }}
-                </div>
-                <div class="form-group">
-                    <label for="id_department">Department:</label>
-                    {{ form.department }}
-                </div>
-                <div class="form-group">
-                    <label for="id_course">Course:</label>
-                    {{ form.course }}
-                </div>
-                <div class="form-group">
-                    <label for="id_phone_number">Phone Number:</label>
-                    {{ form.phone_number }}
-                </div>
-                <div class="form-group">
-                    <label for="id_address">Address:</label>
-                    {{ form.address }}
-                </div>
+                {{form.as_p}}
                 <button type="submit" class="btn btn-submit">Submit</button>
             </form>
         </div>

@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -13,6 +12,7 @@
     
     
 </head>
+
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -107,6 +107,8 @@
                                     <span class="badge badge-info">{{ feedback.severity }}</span>
                                     <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
                                     <span class="badge badge-warning">{{ feedback.status }}</span>
+                                    <p class="card-text">{{feedback.student}}</p>
+
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">{{ feedback.description }}</p>
@@ -129,6 +131,21 @@
                 {% empty %}
                     <div class="alert alert-info">No pending feedback available.</div>
                 {% endfor %}
+                
+                <!-- Pagination for Pending Feedbacks -->
+                {% if feedbacks.has_previous %}
+                    <a href="?page=1">&laquo; First</a>
+                    <a href="?page={{ feedbacks.previous_page_number }}">Previous</a>
+                {% endif %}
+                
+                <span class="current">
+                    Page {{ feedbacks.number }} of {{ feedbacks.paginator.num_pages }}.
+                </span>
+
+                {% if feedbacks.has_next %}
+                    <a href="?page={{ feedbacks.next_page_number }}">Next</a>
+                    <a href="?page={{ feedbacks.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
             </div>
 
             <div class="col-md-6">
@@ -144,6 +161,8 @@
                                     <span class="badge badge-info">{{ feedback.severity }}</span>
                                     <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
                                     <span class="badge badge-success">{{ feedback.status }}</span>
+                                    <p>{{feedback.student}}</p>
+
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">{{ feedback.description }}</p>
@@ -161,6 +180,21 @@
                 {% empty %}
                     <div class="alert alert-info">No solved feedback available.</div>
                 {% endfor %}
+                
+                <!-- Pagination for Solved Feedbacks -->
+                {% if feedbacks.has_previous %}
+                    <a href="?page=1">&laquo; First</a>
+                    <a href="?page={{ feedbacks.previous_page_number }}">Previous</a>
+                {% endif %}
+                
+                <span class="current">
+                    Page {{ feedbacks.number }} of {{ feedbacks.paginator.num_pages }}.
+                </span>
+
+                {% if feedbacks.has_next %}
+                    <a href="?page={{ feedbacks.next_page_number }}">Next</a>
+                    <a href="?page={{ feedbacks.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
             </div>
         </div>
 

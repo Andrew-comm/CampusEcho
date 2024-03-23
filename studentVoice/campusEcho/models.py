@@ -75,7 +75,7 @@ class Profile(models.Model):
     course = models.CharField(max_length=15, blank=True)
     phone_number = models.CharField(
         validators=[phone_regex], 
-        max_length=12, 
+        max_length=15, 
         blank=True, 
         help_text="Phone number must be in the format: '+1234567890'. Up to 15 digits allowed."
     )
@@ -87,6 +87,7 @@ class Profile(models.Model):
 
 
 class Feedback(models.Model):
+   
     CATEGORY_CHOICES = [
         ('academics', 'Academics'),
         ('finance', 'Finance'),
@@ -128,3 +129,32 @@ class Feedback(models.Model):
     
     def __str__(self):
         return f"{self.get_category_display()} Feedback - {self.title}"
+
+
+#Forum
+    
+class Post(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, blank=True)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.author.username} on {self.post.title}"
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username} likes {self.post.title}"
