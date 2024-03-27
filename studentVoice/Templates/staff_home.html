@@ -108,6 +108,10 @@
                                     <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
                                     <span class="badge badge-warning">{{ feedback.status }}</span>
                                     <p class="card-text">{{feedback.student}}</p>
+                                    ADM:  <p class="card-text">{{feedback.student.profile.admission}}</p>
+
+                                   
+
 
                                 </div>
                                 <div class="card-body">
@@ -162,6 +166,7 @@
                                     <span class="badge badge-secondary">{{ feedback.feedback_type }}</span>
                                     <span class="badge badge-success">{{ feedback.status }}</span>
                                     <p>{{feedback.student}}</p>
+                                    ADM:  <p>{{feedback.student.profile.admission}}
 
                                 </div>
                                 <div class="card-body">

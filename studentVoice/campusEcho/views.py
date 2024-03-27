@@ -51,6 +51,9 @@ def studenthome(request):
 def staffhome(request):
     user = request.user    
     feedbacks = Feedback.objects.all().order_by('-submitted_at')   
+   
+    # Iterate over feedbacks and get the profile associated with each student
+   
 
 
     # Get filter parameters from the request
@@ -80,6 +83,7 @@ def staffhome(request):
         'selected_severity': severity,
         'selected_feedback_type': feedback_type,
         'user': user,
+       
     }
     return render(request, 'staff_home.html', context)
 
